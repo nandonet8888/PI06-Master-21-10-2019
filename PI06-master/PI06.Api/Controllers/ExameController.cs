@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using PI06.Api.IServiceRepository;
 using System.Threading.Tasks;
 using PI06.Data.Models.Entity;
+using System;
 
 namespace PI06.Api.Controllers
 {
@@ -33,10 +34,23 @@ namespace PI06.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromRoute] Exame exame) {
+        public IActionResult Post([FromRoute] Exame exame)
+        {
             if (exame == null) {
 
                 return BadRequest();
+            }
+
+
+            try {
+                _exameService.AddAsync(exame);
+                return CreatedAtRoute("GetExame", new { id = exame.Id }, exame);
+
+
+            } catch (Exception e){
+                Console.WriteLine(e.Message);
+                throw;
+
             }
 
 
