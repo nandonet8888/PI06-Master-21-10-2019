@@ -34,7 +34,29 @@ namespace PI06.Api.Controllers
             return Json(consultaAll);
 
         }
+        public IActionResult Post([FromBody] Conselho conselho) {
 
+            if (conselho == null) {
+                return BadRequest();
+            }
+            try
+            {
+                _conselhoService.AddAsync(conselho);
+                return CreatedAtRoute("GetConselho", new { id = conselho.Id }, conselho);
+
+
+
+
+
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+
+
+
+        }
 
     }
 }
