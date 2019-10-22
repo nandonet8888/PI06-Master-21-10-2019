@@ -32,7 +32,15 @@ namespace PI06.Api.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult Post([FromRoute] Exame exame) {
+            if (exame == null) {
 
+                return BadRequest();
+            }
+
+
+        }
 
 
     }

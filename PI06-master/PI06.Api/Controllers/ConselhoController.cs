@@ -43,11 +43,6 @@ namespace PI06.Api.Controllers
             {
                 _conselhoService.AddAsync(conselho);
                 return CreatedAtRoute("GetConselho", new { id = conselho.Id }, conselho);
-
-
-
-
-
             }
             catch (Exception e) {
                 Console.WriteLine(e.Message);

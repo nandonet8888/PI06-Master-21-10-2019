@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using PI06.Api.IServiceRepository;
 using System.Threading.Tasks;
 using PI06.Data.Models.Entity;
+using System;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PI06.Api.Controllers
@@ -30,7 +31,24 @@ namespace PI06.Api.Controllers
             return Json(consultaAll);
 
         }
+        [HttpPost]
+        public IActionResult Post([FromBody] Consulta consulta) {
+            if(consulta == null) {
+                return BadRequest();
+            }
+            try
+            {
+                _consultaService.AddAsync(consulta);
+                return CreatedAtRoute("GetConsulta", new {id = consulta.Id },consulta);
 
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+
+
+        } 
 
 
     }
